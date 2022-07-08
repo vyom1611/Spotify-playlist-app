@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
+import './Track.css'
 
-export default class Track extends Component {
-  render() {
-    return (
-        <div class="Track">
+function Track(props) {
+  return (
+    <div class="Track">
         <div class="Track-information">
-          <h3>{/* <!-- track name will go here --> */}</h3>
-          <p>{/* <!-- track artist will go here--> | <!-- track album will go here --> */}</p>
+          <h3>{props.singleTrack.name}</h3>
+          <p>{props.singleTrack.artist} | {props.singleTrack.album}</p>
         </div>
         <button class="Track-action">{/* <!-- + or - will go here --> */}</button>
-      </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default Track

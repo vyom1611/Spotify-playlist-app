@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
+import TrackList from '../TrackList/TrackList'
+import './SearchResults.css'
 
-export default class SearchResults extends Component {
-  render() {
-    return (
-        <div className="SearchResults">
+function SearchResults(props) {
+  return (
+    <div className="SearchResults">
         <h2>Results</h2>
-        {/* <!-- Add a TrackList component --> */}
+        <TrackList tracks={props.results}/>
       </div>
-    )
-  }
+  )
 }
+
+export default SearchResults

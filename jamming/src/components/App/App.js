@@ -9,7 +9,17 @@ function App(props) {
   const [searchResults, setSearchResults] = useState([{ artist:"The Smile", name: "Pana-vision", album: "-", id: 1},{ artist:"Justin Bieber", name: "Ghost", album: "Justice", id: 2}])
   
   const [playlistName, setPlaylistName] = useState("Peaches");
-  const [playlistTracks, setPlaylistTracks] = useState({name: "Peaches", artist: "Justin Bieber", album: "Justice", id:5});
+  const [playlistTracks, setPlaylistTracks] = useState([{name: "Peaches", artist: "Justin Bieber", album: "Justice", id:5}]);
+
+  const addTrack = (track) => {
+    let tracks = playlistTracks
+    if (tracks.find(savedTrack => savedTrack.id === track.id)) {
+      return
+    } else {
+      setPlaylistTracks(trackList => [...trackList, track])
+    }
+  }
+
 
     return (
     <div>
@@ -17,7 +27,7 @@ function App(props) {
       <div class="App">
         <SearchBar />
         <div class="App-playlist">
-          <SearchResults results={searchResults}/>
+          <SearchResults results={searchResults} onAdd={addTrack}/>
           <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
         </div>
       </div>

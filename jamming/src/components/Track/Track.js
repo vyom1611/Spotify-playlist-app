@@ -5,7 +5,10 @@ function Track(props) {
 
   const addTrack = () => {
     props.onAdd(props.singleTrack);
+  }
 
+  const removeTrack = () => {
+    props.onRemoval(props.singleTrack)
   }
 
   return (
@@ -14,7 +17,7 @@ function Track(props) {
           <h3>{props.singleTrack.name}</h3>
           <p>{props.singleTrack.artist} | {props.singleTrack.album}</p>
         </div>
-        {props.isRemoval ? props.isRemoval && <button class="Track-action" onClick={addTrack}>+</button> : <button class="Track-action" onClick={addTrack}>+</button>}
+        {props.isRemoval ? (<button class="Track-action" onClick={removeTrack}>-</button>) : (<button class="Track-action" onClick={addTrack}>+</button>)}
     </div>
   )
 }

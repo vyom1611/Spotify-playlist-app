@@ -9,16 +9,21 @@ function App(props) {
   const [searchResults, setSearchResults] = useState([{ artist:"The Smile", name: "Pana-vision", album: "-", id: 1},{ artist:"Justin Bieber", name: "Ghost", album: "Justice", id: 2}])
   
   const [playlistName, setPlaylistName] = useState("Peaches");
-  const [playlistTracks, setPlaylistTracks] = useState([{name: "Peaches", artist: "Justin Bieber", album: "Justice", id:5}]);
+  const [playlistTracksArray, setPlaylistTracks] = useState([]);
 
   const addTrack = (track) => {
-    let tracks = playlistTracks
+    let tracks = playlistTracksArray
     if (tracks.find(savedTrack => savedTrack.id === track.id)) {
       return
     } else {
-      setPlaylistTracks(trackList => [...trackList, track])
+      setPlaylistTracks(playlistTracksArray => [...playlistTracksArray, track])
     }
   }
+
+  const removeTrack = (track) => {
+    setPlaylistTracks((current) => current.filter(currentTrack => { return currentTrack.id !== track.id}));
+    }
+  
 
 
     return (
@@ -28,7 +33,7 @@ function App(props) {
         <SearchBar />
         <div class="App-playlist">
           <SearchResults results={searchResults} onAdd={addTrack}/>
-          <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
+          <Playlist playlistName={playlistName} playlistTracks={playlistTracksArray} onRemove={removeTrack}/>
         </div>
       </div>
     </div>

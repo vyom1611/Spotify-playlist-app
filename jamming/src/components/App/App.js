@@ -6,11 +6,12 @@ import SearchResults from '../SearchResults/SearchResults'
 
 function App(props) {
 
-  const [searchResults, setSearchResults] = useState([{ artist:"The Smile", name: "Pana-vision", album: "-", id: 1},{ artist:"Justin Bieber", name: "Ghost", album: "Justice", id: 2}])
+  const [searchResults, setSearchResults] = useState([{ artist:"Exmaple Artist 1", name: "Example Name 1", album: "Example album 1", id: 1},{ artist:"Justin Example Artist 2", name: "Example name 2", album: "Example Album 2", id: 2}])
   
-  const [playlistName, setPlaylistName] = useState("Peaches");
+  const [playlistName, setPlaylistName] = useState("My Playlist");
   const [playlistTracksArray, setPlaylistTracks] = useState([]);
 
+  //AddTrack Method
   const addTrack = (track) => {
     let tracks = playlistTracksArray
     if (tracks.find(savedTrack => savedTrack.id === track.id)) {
@@ -20,9 +21,16 @@ function App(props) {
     }
   }
 
+
+  //RemoveTrack method
   const removeTrack = (track) => {
     setPlaylistTracks((current) => current.filter(currentTrack => { return currentTrack.id !== track.id}));
     }
+
+  //Change playlist name method
+  const updatePlaylistname = (name) => {
+    setPlaylistName((playlistName) => name)
+  }
   
 
 
@@ -33,7 +41,10 @@ function App(props) {
         <SearchBar />
         <div class="App-playlist">
           <SearchResults results={searchResults} onAdd={addTrack}/>
-          <Playlist playlistName={playlistName} playlistTracks={playlistTracksArray} onRemove={removeTrack}/>
+          <Playlist playlistName={playlistName} 
+                    playlistTracks={playlistTracksArray} 
+                    onRemove={removeTrack} 
+                    onNameChange={updatePlaylistname} />
         </div>
       </div>
     </div>

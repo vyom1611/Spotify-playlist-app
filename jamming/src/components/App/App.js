@@ -10,6 +10,8 @@ function App(props) {
   
   const [playlistName, setPlaylistName] = useState("My Playlist");
   const [playlistTracksArray, setPlaylistTracks] = useState([]);
+  const [trackURIs, setTrackURIs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   //AddTrack Method
   const addTrack = (track) => {
@@ -31,6 +33,16 @@ function App(props) {
   const updatePlaylistname = (name) => {
     setPlaylistName((playlistName) => name)
   }
+
+  //Save playlist method
+  const savePlaylist = () => {
+    setTrackURIs(playlistTracksArray => playlistTracksArray.map(track => track.uri));
+  }
+
+  const search = (term) => {
+    setSearchTerm((searchTerm) => term)
+    console.log(searchTerm)
+  }
   
 
 
@@ -38,13 +50,14 @@ function App(props) {
     <div>
       <h1>Ja<span class="highlight">mmm</span>ing</h1>
       <div class="App">
-        <SearchBar />
+        <SearchBar onSearch={search} />
         <div class="App-playlist">
           <SearchResults results={searchResults} onAdd={addTrack}/>
           <Playlist playlistName={playlistName} 
                     playlistTracks={playlistTracksArray} 
                     onRemove={removeTrack} 
-                    onNameChange={updatePlaylistname} />
+                    onNameChange={updatePlaylistname} 
+                    onSave={savePlaylist} />
         </div>
       </div>
     </div>
